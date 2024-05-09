@@ -1,0 +1,178 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <ctype.h>
+#include <time.h>
+#include <conio.h> 
+#include <windows.h> 
+
+int Nivel1(){
+	char mapa1[10][10]={
+    	"********D*",
+		"*   *    *",
+		"* * * ****",
+		"* *   *  *", 
+		"* ********", 
+		"*        *", 
+		"* *****  *",
+		"*     * **", 
+		"*     * @*",
+		"**********"
+
+    };
+    int i, j;
+    int jogador_x = 8;
+    int jogador_y = 2; 
+    char movimento; 
+
+    while (1) {  
+        clearScreen();
+
+        for(i = 0; i < 10; i++) {
+            for(j = 0; j < 10; j++) {
+                if (i == jogador_x && j == jogador_y) {
+                    printf("&");
+                } else {
+                    printf("%c", mapa1[i][j]);
+                }
+            }
+            printf("\n");
+        }
+            movimento = getch();
+            switch (movimento) {
+                case 'w':
+                case 'W':
+                    if (jogador_x > 0 && mapa1[jogador_x - 1][jogador_y] != '*' && mapa1[jogador_x - 1][jogador_y] != 'D') {
+                        jogador_x--;
+                    }
+                    break;
+                case 'a':
+                case 'A':
+                    if (jogador_y > 0 && mapa1[jogador_x][jogador_y - 1] != '*' && mapa1[jogador_x][jogador_y-1] != 'D') {
+                        jogador_y--;
+                    }
+                    break;
+                case 's':
+                case 'S':
+                    if (jogador_x < 9 && mapa1[jogador_x + 1][jogador_y] != '*' && mapa1[jogador_x + 1][jogador_y] != 'D') {
+                        jogador_x++;
+                    }
+                    break;
+                case 'd':
+                case 'D':
+                    if (jogador_y < 9 && mapa1[jogador_x][jogador_y + 1] != '*' && mapa1[jogador_x][jogador_y + 1] != 'D') {
+                        jogador_y++;
+                    }
+                    break;
+                case 'i':
+                case 'I':
+                	if(jogador_x == 8 && jogador_y == 8){
+                		mapa1[0][8] = '=';
+					}
+					break;
+				default:
+                    printf("Movimento invalido!\n");
+                    break;
+            }
+   }
+}
+
+
+void exibirMenuInicial() {
+    printf("\n=== MENU INICIAL ===\n");
+    printf("1. Iniciar o jogo\n");
+    printf("2. Tutorial\n");
+	printf("3. Sair\n");
+    printf("====================\n");
+    printf("Escolha uma opcao: ");
+}
+void exibirTutorial() {
+	printf("ARGO DC eh um jogo do estilo aventura/puzzle onde o seu objetivo eh simplesmente passar\nde tres fases. Em cada uma delas seu objetivo eh pegar uma chave para abrir a porta\nfechada.\n\nComandos:\nW: Voce se movimenta uma unidade para cima;\nA: Voce se movimenta uma unidade para esquerda;\nS: Voce se movimenta uma unidade para baixo;\nD: Voce se movimenta uma unidade para direita;\nI: Voce interage com o objeto que esta em cima.\n\nElementos das fases:\n\n&: Simbolo que representa voce.\n\n*: Simbolo que representa uma parede, voce nao pode passar por uma parede ao se \nmovimentar.\n@: Simbolo que representa a chave para abrir a porta para finalizar a fase, a porta\nabre no momento que voce interage com a chave.\nD: Simbolo que representa a porta fechada.=: Simbolo que representa a porta aberta quando voce interage com a chave.\nO: Simbolo que representa um botao que voce pode interagir, o botao fica no chao\ne voce deve ficar em cima dele para poder interagir.\n#: Simbolo que representa um espinho. A fase eh reiniciada quando voce toca no\nespinho, caso a fase seja reiniciada tres vezes, o jogo volta para o menu principal.\n>: Simbolo que representa um teletransporte. O teletransporte estara sempre em \npares, quando voce toca em um voce eh transportado para o outro e vice-versa.\nX: Simbolo que representa o monstro nivel 1. Esse monstro tem um movimento aleatorio\npara cima, para esquerda, para baixo e para direita. Caso o monstro o toque a fase eh\nreiniciada.\nV: Simbolo que representa o monstro nivel 2. Esse monstro vai te seguir. Caso o\nmonstro o toque a fase eh reiniciada.\n\n\n");
+}
+void clearScreen() {
+    system("cls");
+}
+
+
+int main(int argc, char *argv[]) {
+char escolha[50];
+    char nomePersonagem[50];
+    int fase = 1;
+
+    printf("                  _____   _____  \n");
+    printf("    A    RRRRRR  / ____| / ___ \\ \n");
+    printf("   / \\   R     R | |  __/ /   \\ \\\n");
+    printf("  /   \\  RRRRRR  | | |_ ||     | |\n");
+    printf(" /_____\\ R   R   | |__| |\ \\___/ /\n");
+    printf("/       \\R    R  \\_____| \\_____/\n");
+    printf("\n   D u n g e o n   C r a w l e r");
+
+    do {
+        printf("\n\n    Digite [START] para iniciar!\n\n\n            ");
+        scanf("%s", escolha);
+        
+        int i=0;
+        while(escolha[i]){
+            escolha[i] = tolower(escolha[i]);
+            i++;
+        }
+
+        clearScreen();
+
+        if (strcmp(escolha, "start") == 0) {
+            break;
+        } else {
+            printf("                  _____   _____  \n");
+            printf("    A    RRRRRR  / ____| / ___ \\ \n");
+            printf("   / \\   R     R | |  __/ /   \\ \\\n");
+            printf("  /   \\  RRRRRR  | | |_ ||     | |\n");
+            printf(" /_____\\ R   R   | |__| |\ \\___/ /\n");
+            printf("/       \\R    R  \\_____| \\_____/\n");
+            printf("\n   D u n g e o n   C r a w l e r");
+            printf("\n\n Por favor, digite 'START' para iniciar o jogo.\n");
+        }
+    } while (1);	
+
+int escolhaMenu = 0;
+
+  do {
+    exibirMenuInicial();
+    scanf("%d", &escolhaMenu);
+
+    while(getchar() != '\n');
+	
+	switch (escolhaMenu) {
+        case 1:
+            printf("Iniciando o jogo");
+            printf("."); sleep(1); printf("."); sleep(1); printf("."); sleep(1);
+            clearScreen();
+            printf("\n\nDigite o nome do seu personagem:\n");
+            scanf("%s", nomePersonagem);
+            int vida=5;
+            while(vida>0){
+			Nivel1();
+        	}
+            clearScreen();
+            break;
+        case 2: 
+            printf("Exibindo tutorial");
+            printf("."); sleep(1); printf("."); sleep(1); printf("."); sleep(1);
+            clearScreen();
+            exibirTutorial();
+            printf("Pressione ENTER para voltar ao menu principal");
+    		while (getchar() != '\n');
+            clearScreen();
+            break;
+        case 3:
+            printf("Saindo do jogo");
+            printf("."); sleep(1); printf("."); sleep(1); printf("."); sleep(1);
+            exit(0);
+        default:
+            clearScreen();
+			printf("Opcao invalida. Tente novamente.\n");
+            break;
+    }
+}while(escolhaMenu != 1 && escolhaMenu != 3);
+
+	return 0;
+}
