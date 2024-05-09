@@ -1,2 +1,2 @@
 # Projeto---Dungeon-Crawler
-joguinho em desenvolvimento
+joguinho em desenvolvimento na linguagem C
